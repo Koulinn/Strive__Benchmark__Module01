@@ -1,0 +1,8 @@
+.correct-answer{
+    background-color: rgba(0, 255, 255, 0.322);
+
+}
+
+.wrong-answer {
+    background-color: rgba(211, 117, 80, 0.582);
+}

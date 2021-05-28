@@ -52,16 +52,16 @@ function createHTMLForEachQuestion(questions) {
                 <div class"form">
                     
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-                        <label for="inc0"> ${question.incorrect_answers[0]}</label><br>
+                        <label for="inc0"> ${question.incorrect_answers[0]}</label>
                         
                         <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
-                        <label for="cor"> ${question.correct_answer}</label><br>
+                        <label for="cor"> ${question.correct_answer}</label>
                         
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-                        <label for="inc1"> ${question.incorrect_answers[1]}</label><br>
+                        <label for="inc1"> ${question.incorrect_answers[1]}</label>
                         
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-                        <label for="inc2"> ${question.incorrect_answers[2]}</label><br>
+                        <label for="inc2"> ${question.incorrect_answers[2]}</label>
                     
                 </div>
             
@@ -79,10 +79,17 @@ function checkPoints() {
     for (let input of allInputs) {
         if (input.checked && (input.value === '1')) {
             points++
+            input.nextElementSibling.classList.add('correct-answer')
+            input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Well done! </strong>`)
+        }
+        if (input.checked && (input.value === '0')) {
+            input.nextElementSibling.classList.add('wrong-answer')
+            input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Woops! Not this time! </strong>`)
         }
     }
     return points
 }
+
 
 function showTotalPoints() {
     let totalPoints = checkPoints()
@@ -98,6 +105,7 @@ function showTotalPoints() {
         showResultDiv.innerHTML = `<h2> You got ${totalPoints} from 10</h2>`
     }
 }
+
 
 
 
