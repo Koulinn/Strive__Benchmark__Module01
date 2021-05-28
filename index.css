@@ -6,3 +6,7 @@
 .wrong-answer {
     background-color: rgba(211, 117, 80, 0.582);
 }
+
+#btn-check-points{
+    margin-top: 3rem;
+}
