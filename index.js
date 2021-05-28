@@ -77,18 +77,22 @@ function checkPoints() {
 }
 
 
+let flag = 0
 function showTotalPoints() {
-    let totalPoints = checkPoints()
-    let mainHTML = document.getElementsByTagName('main')[0]
-
-    if (document.getElementById('show-result') === null) {
-        mainHTML.insertAdjacentHTML('afterbegin', `
-        <div id="show-result"><h2> You got ${totalPoints} from 10</h2></div>
-        `)
-    } else {
-        let showResultDiv = document.getElementById('show-result')
-        console.log()
-        showResultDiv.innerHTML = `<h2> You got ${totalPoints} from 10</h2>`
+    if(flag === 0) {
+        flag++
+        let totalPoints = checkPoints()
+        let mainHTML = document.getElementsByTagName('main')[0]
+        
+        if (document.getElementById('show-result') === null) {
+            mainHTML.insertAdjacentHTML('afterbegin', `
+            <div id="show-result"><h2> You got ${totalPoints} from 10</h2></div>
+            `)
+        } else {
+            let showResultDiv = document.getElementById('show-result')
+            console.log()
+            showResultDiv.innerHTML = `<h2> You got ${totalPoints} from 10</h2>`
+        }
     }
 }
 
