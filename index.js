@@ -6,90 +6,19 @@ let currentQuestion = 0
 window.onload = () => {
 
     createHTMLForEachQuestion(Allquestions)
-   
+
 
 }
-
-function genQuestions(questionCollection){
-
-}
-
-
-
-
-
-
-
-// let clicklListener = document.getElementById(`form1${indexOfEachQuestion}`).addEventListener('click', () => {continue})
-
-
-
-
-
-
-
-// function createHTMLForEachQuestion(questions) {
-
-//     for (question of questions) {
-//         let indexOfEachQuestion = questions.indexOf(question)
-//         if (question.type === 'boolean') {
-//             questionContainer.insertAdjacentHTML('beforeend', `
-//             <div class='question boolean'>
-//                 <h3>Question ${indexOfEachQuestion +1} -> ${question.question}</h3>
-//                 <div class="form-container">
-//                         <form id="form${indexOfEachQuestion} onclick="nextQuestion()"">
-//                             <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
-//                             <label for="true">${question.correct_answer}</label>
-
-//                             <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">  
-//                             <label for="false">${question.incorrect_answers[0]}</label>
-//                         </form>
-//                 </div>    
-//             </div>`)
-//             clicklListener
-
-
-//         }
-
-//         if (question.type === 'multiple') {
-//             questionContainer.insertAdjacentHTML('beforeend', `
-//             <div class='question multiple'>
-//             <h3>Question ${indexOfEachQuestion +1} -> ${question.question}</h3>
-//                 <div class="form-container">
-//                     <form id="form${indexOfEachQuestion + 1} onclick="nextQuestion()">
-//                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-//                         <label for="inc0"> ${question.incorrect_answers[0]}</label>
-
-//                         <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
-//                         <label for="cor"> ${question.correct_answer}</label>
-
-//                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-//                         <label for="inc1"> ${question.incorrect_answers[1]}</label>
-
-//                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
-//                         <label for="inc2"> ${question.incorrect_answers[2]}</label>
-//                     </form>
-//                 </div>
-
-//             </div>
-//             `)
-//             clicklListener
-
-//         }
-//     }
-
-// }
-
 
 function createHTMLForEachQuestion(questions) {
-    // console.log('asdsad', questions.length)
-    if(currentQuestion < questions.length) {
 
-        
-            if (questions[currentQuestion].type === 'boolean') {
-                questionContainer.insertAdjacentHTML('beforeend', `
+    if (currentQuestion < questions.length) {
+
+
+        if (questions[currentQuestion].type === 'boolean') {
+            questionContainer.insertAdjacentHTML('beforeend', `
                 <div class='question boolean'>
-                <h3>Question ${currentQuestion +1} -> ${questions[currentQuestion].question}</h3>
+                <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
                 <div class="form-container">
                 <form id="form${currentQuestion}" onclick="createHTMLForEachQuestion(Allquestions)">
                 <input type="radio" class="cor" name="question${currentQuestion}" value="1">
@@ -100,11 +29,11 @@ function createHTMLForEachQuestion(questions) {
                 </form>
                 </div>    
                 </div>`)
-            }
-            if (questions[currentQuestion].type === 'multiple') {
-                questionContainer.insertAdjacentHTML('beforeend', `
+        }
+        if (questions[currentQuestion].type === 'multiple') {
+            questionContainer.insertAdjacentHTML('beforeend', `
                 <div class='question multiple'>
-                <h3>Question ${currentQuestion +1} -> ${questions[currentQuestion].question}</h3>
+                <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
                 <div class="form-container" onclick="createHTMLForEachQuestion(Allquestions)">
                 <form id="form${currentQuestion + 1}">
                 <input type="radio" class="inc" name="question${currentQuestion}" value="0">
@@ -122,18 +51,18 @@ function createHTMLForEachQuestion(questions) {
                 </div>
                 
                 </div>
-                `)                
-            }
-            currentQuestion++
-               
+                `)
         }
-        
+        currentQuestion++
+
     }
-    
-    function checkPoints() {
-        let allInputs = document.getElementsByTagName('input')
-        let points = 0
-        for (let input of allInputs) {
+
+}
+
+function checkPoints() {
+    let allInputs = document.getElementsByTagName('input')
+    let points = 0
+    for (let input of allInputs) {
         if (input.checked && (input.value === '1')) {
             points++
             input.nextElementSibling.classList.add('correct-answer')
