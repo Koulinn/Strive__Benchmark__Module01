@@ -3,4 +3,4 @@ Quiz Game
 
 
 
-I didn't focused on CSS
+I didn't focus on CSS
