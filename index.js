@@ -30,8 +30,7 @@ window.onload = () => {
 function createHTMLForEachQuestion(questions) {
     
     for(question of questions){
-        // To create a name for each group of Radiobutton
-        let indexOfEachQuestion = questions.indexOf[questions[question]]      
+        let indexOfEachQuestion = questions.indexOf(question)     
         
         if(question.type === 'boolean'){
             questionContainer.insertAdjacentHTML('beforeend', `
