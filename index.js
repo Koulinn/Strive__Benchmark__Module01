@@ -2,110 +2,93 @@ const questionsBank = { "response_code": 0, "results": [{ "category": "Science: 
 const Allquestions = questionsBank.results
 const questionContainer = document.getElementById('questions-container')
 
+
 window.onload = () => {
 
     createHTMLForEachQuestion(Allquestions)
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function createHTMLForEachQuestion(questions) {
 
     for (question of questions) {
         let indexOfEachQuestion = questions.indexOf(question)
-
         if (question.type === 'boolean') {
             questionContainer.insertAdjacentHTML('beforeend', `
             <div class='question boolean'>
-                <h3>Question -> ${question.question}</h3>
-                <div class="form">
-                    
-                        <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
-                        <label for="true">${question.correct_answer}</label>
+                <h3>Question ${indexOfEachQuestion +1} -> ${question.question}</h3>
+                <div class="form-container">
+                        <form id="form${indexOfEachQuestion} onclick="nextQuestion()"">
+                            <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
+                            <label for="true">${question.correct_answer}</label>
 
-                        <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">  
-                        <label for="false">${question.incorrect_answers[0]}</label>
-                    
+                            <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">  
+                            <label for="false">${question.incorrect_answers[0]}</label>
+                        </form>
                 </div>    
             </div>`)
-
-
         }
 
         if (question.type === 'multiple') {
             questionContainer.insertAdjacentHTML('beforeend', `
             <div class='question multiple'>
-            <h3>Question -> ${question.question}</h3>
-                <div class"form">
-                    
+            <h3>Question ${indexOfEachQuestion +1} -> ${question.question}</h3>
+                <div class="form-container">
+                    <form id="form${indexOfEachQuestion + 1} onclick="nextQuestion()">
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc0"> ${question.incorrect_answers[0]}</label>
-                        
+
                         <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
                         <label for="cor"> ${question.correct_answer}</label>
-                        
+
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc1"> ${question.incorrect_answers[1]}</label>
-                        
+
                         <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc2"> ${question.incorrect_answers[2]}</label>
-                    
+                    </form>
                 </div>
-            
+
             </div>
             `)
-
         }
     }
 
 }
 
-function checkPoints() {
-    let allInputs = document.getElementsByTagName('input')
-    let points = 0
-    for (let input of allInputs) {
-        if (input.checked && (input.value === '1')) {
-            points++
-            input.nextElementSibling.classList.add('correct-answer')
-            input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Well done! </strong>`)
+    function checkPoints() {
+        let allInputs = document.getElementsByTagName('input')
+        let points = 0
+        for (let input of allInputs) {
+            if (input.checked && (input.value === '1')) {
+                points++
+                input.nextElementSibling.classList.add('correct-answer')
+                input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Well done! </strong>`)
+            }
+            if (input.checked && (input.value === '0')) {
+                input.nextElementSibling.classList.add('wrong-answer')
+                input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Woops! Not this time! </strong>`)
+            }
         }
-        if (input.checked && (input.value === '0')) {
-            input.nextElementSibling.classList.add('wrong-answer')
-            input.nextElementSibling.insertAdjacentHTML('beforeend', `<strong> Woops! Not this time! </strong>`)
-        }
+        return points
     }
-    return points
-}
 
 
-function showTotalPoints() {
-    let totalPoints = checkPoints()
-    let mainHTML = document.getElementsByTagName('main')[0]
+    function showTotalPoints() {
+        let totalPoints = checkPoints()
+        let mainHTML = document.getElementsByTagName('main')[0]
 
-    if (document.getElementById('show-result') === null) {
-        mainHTML.insertAdjacentHTML('afterbegin', `
+        if (document.getElementById('show-result') === null) {
+            mainHTML.insertAdjacentHTML('afterbegin', `
         <div id="show-result"><h2> You got ${totalPoints} from 10</h2></div>
         `)
-    } else {
-        let showResultDiv = document.getElementById('show-result')
-        console.log()
-        showResultDiv.innerHTML = `<h2> You got ${totalPoints} from 10</h2>`
+        } else {
+            let showResultDiv = document.getElementById('show-result')
+            console.log()
+            showResultDiv.innerHTML = `<h2> You got ${totalPoints} from 10</h2>`
+        }
     }
-}
 
 
-
+    console.log(HTMLQuestionsCollection)
 
