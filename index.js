@@ -4,7 +4,7 @@ const questionContainer = document.getElementById('questions-container')
 
 window.onload = () => {
     
-
+    createHTMLForEachQuestion(Allquestions)
 
 }
 
@@ -38,10 +38,10 @@ function createHTMLForEachQuestion(questions) {
                 <h3>Question -> ${question.question}</h3>
                 <div class="form">
                     
-                        <input type="radio" class="true" name="question${indexOfEachQuestion}" value="1">
+                        <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
                         <label for="true">${question.correct_answer}</label>
 
-                        <input type="radio" class="false" name="question${indexOfEachQuestion}" value="0">  
+                        <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">  
                         <label for="false">${question.incorrect_answers[0]}</label>
                     
                 </div>    
@@ -56,16 +56,16 @@ function createHTMLForEachQuestion(questions) {
             <h3>Question -> ${question.question}</h3>
                 <div class"form">
                     
-                        <input type="radio" class="inc0" name="question${indexOfEachQuestion}" value="0">
+                        <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc0"> ${question.incorrect_answers[0]}</label><br>
                         
                         <input type="radio" class="cor" name="question${indexOfEachQuestion}" value="1">
                         <label for="cor"> ${question.correct_answer}</label><br>
                         
-                        <input type="radio" class="inc1" name="question${indexOfEachQuestion}" value="0">
+                        <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc1"> ${question.incorrect_answers[1]}</label><br>
                         
-                        <input type="radio" class="inc2" name="question${indexOfEachQuestion}" value="0">
+                        <input type="radio" class="inc" name="question${indexOfEachQuestion}" value="0">
                         <label for="inc2"> ${question.incorrect_answers[2]}</label><br>
                     
                 </div>
@@ -77,8 +77,14 @@ function createHTMLForEachQuestion(questions) {
 
 }
 
-createHTMLForEachQuestion(Allquestions)
 
-// function checkPoints(){
-//     document.getElementsByClassName('cor')
-// }
+function checkPoints(){
+    let allInputs = document.getElementsByTagName('input')
+    let points = 0
+    for(let input of allInputs){
+        if(input.checked  && (input.value === '1')){
+            points++
+        }
+    }
+    return points
+}
