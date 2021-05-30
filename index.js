@@ -13,59 +13,91 @@ window.onload =  async () => {
     Allquestions = data.results
     createHTMLForEachQuestion(Allquestions)
 }
+
+
 function createHTMLForEachQuestion(questions) {
     
-    if (currentQuestion < questions.length) {
-        
-        
+    if (currentQuestion < questions.length) { 
         if (questions[currentQuestion].type === 'boolean') {
             questionContainer.insertAdjacentHTML('beforeend', `
             <div class='question boolean'>
             <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
             <div class="form-container">
             <form id="form${currentQuestion}" onclick="createHTMLForEachQuestion(Allquestions)">
+            <div class="correct">
             <input type="radio" class="cor" name="question${currentQuestion}" value="1">
             <label for="true">${questions[currentQuestion].correct_answer}</label>
+            </div>
             
+            <div class="wrong">
             <input type="radio" class="inc" name="question${currentQuestion}" value="0">  
             <label for="false">${questions[currentQuestion].incorrect_answers[0]}</label>
+            </div>
+            
             </form>
             </div>    
             </div>`)
+            mixQuestions()
+            return
         }
         if (questions[currentQuestion].type === 'multiple') {
             questionContainer.insertAdjacentHTML('beforeend', `
             <div class='question multiple'>
             <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
-            <div class="form-container" onclick="createHTMLForEachQuestion(Allquestions)">
-            <form id="form${currentQuestion + 1}">
-            <input type="radio" class="inc" name="question${currentQuestion}" value="0">
-            <label for="inc0"> ${questions[currentQuestion].incorrect_answers[0]}</label>
             
+            <div class="form-container" onclick="createHTMLForEachQuestion(Allquestions)">
+            <form id="form${currentQuestion}">
+            
+            <div class="correct">
             <input type="radio" class="cor" name="question${currentQuestion}" value="1">
             <label for="cor"> ${questions[currentQuestion].correct_answer}</label>
+            </div>
             
+            <div class="wrong">
+            <input type="radio" class="inc" name="question${currentQuestion}" value="0">
+            <label for="inc0"> ${questions[currentQuestion].incorrect_answers[0]}</label>
+            </div>
+            
+            <div class="wrong">
             <input type="radio" class="inc" name="question${currentQuestion}" value="0">
             <label for="inc1"> ${questions[currentQuestion].incorrect_answers[1]}</label>
+            </div>
             
+            <div class="wrong">
             <input type="radio" class="inc" name="question${currentQuestion}" value="0">
             <label for="inc2"> ${questions[currentQuestion].incorrect_answers[2]}</label>
+            </div>
+            
             </form>
             </div>
             
             </div>
             `)
+            mixQuestions()
         }
-        currentQuestion++
-        
     }
     
 }
-    
-    function checkPoints() {
-        let allInputs = document.getElementsByTagName('input')
-        let points = 0
-        for (let input of allInputs) {
+function mixQuestions(){
+console.log('current question->', currentQuestion)
+    let allInputs = document.querySelectorAll(`#form${currentQuestion} div`)
+    console.log(allInputs)
+
+    if(allInputs.length === 2){
+        let indexMixed = Math.floor(Math.random() * 1)
+        allInputs[0].parentNode.insertBefore(allInputs[0], allInputs[indexMixed])
+        currentQuestion++
+    } else {
+        let indexMixed = Math.floor(Math.random() * 4)
+        allInputs[0].parentNode.insertBefore(allInputs[0], allInputs[indexMixed])
+        currentQuestion++
+    }
+}
+
+function checkPoints() {
+    let allInputs = document.getElementsByTagName('input')
+    let points = 0
+    for (let input of allInputs) {
         if (input.checked && (input.value === '1')) {
             points++
             input.nextElementSibling.classList.add('correct-answer')
