@@ -20,8 +20,8 @@ function createHTMLForEachQuestion(questions) {
     if (currentQuestion < questions.length) { 
         if (questions[currentQuestion].type === 'boolean') {
             questionContainer.insertAdjacentHTML('beforeend', `
-            <div class='question boolean'>
-            <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
+            <div class='question boolean bg'>
+            <h5>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h5>
             <div class="form-container">
             <form id="form${currentQuestion}" onclick="createHTMLForEachQuestion(Allquestions)">
             <div class="correct">
@@ -42,8 +42,8 @@ function createHTMLForEachQuestion(questions) {
         }
         if (questions[currentQuestion].type === 'multiple') {
             questionContainer.insertAdjacentHTML('beforeend', `
-            <div class='question multiple'>
-            <h3>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h3>
+            <div class='question multiple bg'>
+            <h5>Question ${currentQuestion + 1} -> ${questions[currentQuestion].question}</h5>
             
             <div class="form-container" onclick="createHTMLForEachQuestion(Allquestions)">
             <form id="form${currentQuestion}">
